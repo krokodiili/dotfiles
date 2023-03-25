@@ -3,6 +3,8 @@
 #
 #o
 
+source /usr/share/nvm/init-nvm.sh
+source /home/melty/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 ZSH="$HOME/.oh-my-zsh"
 alias calendar=calcurse
 alias vim=nvim

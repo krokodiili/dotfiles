@@ -34,28 +34,22 @@ else
     ARGS=""
 fi
 
-i3lock "$ARGS" -t -i "$UNSPLASH_DIR"/image.png \
-    --clock --force-clock --time-str="%H:%M:%S" --time-size=96 --time-color=FFFFFFFF \
-     --date-str="$DATE" --date-pos="tx:ty" --date-size=32 --date-color=FFFFFFFF \
-    --ind-pos="w/2-r/2:h-r*2" --radius 20 \
-    --ring-color=$ringcolor --inside-color=$insidecolor --line-color=$linecolor \
-    # --separatorcolor=$separatorcolor --ringvercolor=$ringvercolor \
-    # --insidevercolor=$insidevercolor --veriftext='' --ringwrongcolor=$ringwrongcolor \
-    # --insidewrongcolor=$insidewrongcolor --wrongtext='' --keyhlcolor=$keyhlcolor \
-    # --bshlcolor=$bshlcolor --noinputtext=''
+betterlockscreen --lock -u ~/wallpapers --display 2 --dim 20
 
-if [[ "$SUSPEND" -eq 1 ]]; then
-    if type nvidia-smi 2>/dev/null; then
-        if [[ $(nvidia-smi --query-compute-apps=pid --format=csv,noheader | wc -l) -eq 0 ]]; then
-            systemctl suspend
-        fi
-    else
-        systemctl suspend
-    fi
-fi
 
-feh --bg-scale $HOME/unsplash/image.png
+# For desktop
+# if [[ "$SUSPEND" -eq 1 ]]; then
+#     if type nvidia-smi 2>/dev/null; then
+#         if [[ $(nvidia-smi --query-compute-apps=pid --format=csv,noheader | wc -l) -eq 0 ]]; then
+#             systemctl suspend
+#         fi
+#     else
+#         systemctl suspend
+#     fi
+# fi
 
-if ping -q -c 1 -W 1 8.8.8.8 >/dev/null; then
-    unsplash.sh > $HOME/unsplash/log 2>&1 &
-fi
+# feh --bg-scale $HOME/unsplash/image.png
+
+# if ping -q -c 1 -W 1 8.8.8.8 >/dev/null; then
+#     unsplash.sh > $HOME/unsplash/log 2>&1 &
+# fi
