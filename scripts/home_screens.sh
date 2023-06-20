@@ -1,12 +1,7 @@
+#!/bin/bash
+
 xrandr --output "$SIDE_MONITOR" --auto --panning 0x0 --output "$WORK_MONITOR" --auto --right-of "$SIDE_MONITOR"
 
+exec ~/scripts/poly
 
 nitrogen --restore &
-
-i3-msg "workspace 1, move workspace to output $WORK_MONITOR"
-i3-msg "workspace 2, move workspace to output $WORK_MONITOR"
-i3-msg "workspace 3, move workspace to output $WORK_MONITOR"
-i3-msg "workspace 4, move workspace to output $WORK_MONITOR"
-i3-msg "workspace 5, move workspace to output $SIDE_MONITOR"
-i3-msg "workspace 6, move workspace to output $SIDE_MONITOR"
-

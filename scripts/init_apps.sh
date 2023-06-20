@@ -64,8 +64,7 @@
 # App you want to start :
 apps=(
 "slack"
-"teams"
-"youtube-music"
+"teams-for-linux"
 )
 
 # Which workspace assign to your wanted App :

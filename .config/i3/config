@@ -1,8 +1,7 @@
 set $mod Mod4
 ####################################
-exec_always --no-startup-id ~/scripts/home_screens.sh
 
-
+exec --no-startup-id udiskie
 #Audio
 exec --no-startup-id nm-applet
 # Pulse Audio controls
@@ -18,11 +17,6 @@ exec --no-startup-id ~/scripts/switch_caps_escape.sh
 exec --no-startup-id ~/scripts/init_apps.sh
 exec --no-startup-id libinput-gestures-setup start
 exec --no-startup-id flameshot
-#exec --no-startup-id fcitx
-exec_always --no-startup-id xmodmap ~/.Xmodmap
-
-# Polybar
-exec --no-startup-id ~/scripts/polybar/lauch.sh
 
 # Wifi manager
 exec --no-startup-id nm-applet
@@ -217,9 +211,8 @@ bindsym $mod+b exec bookmarks
 
 # lock
 bindsym $mod+F11 exec ~/scripts/lock.sh
-
 # suspend
-bindsym $mod+F12 exec ~/scripts/lock.sh -s
+bindsym $mod+F12 exec systemctl suspend
 
 # Configure border style <normal|1pixel|pixel xx|none|pixel>
 default_border pixel 4
