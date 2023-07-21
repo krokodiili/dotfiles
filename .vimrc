@@ -33,6 +33,8 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'ThePrimeagen/harpoon'
+Plug 'lewis6991/gitsigns.nvim'
+
 Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.0' }
 Plug 'ryanoasis/vim-devicons'
 Plug 'nvim-telescope/telescope-file-browser.nvim'
@@ -66,7 +68,7 @@ Plug 'tpope/vim-rhubarb'          " :GBrowse
 Plug 'tpope/vim-commentary'
 Plug 'mattn/emmet-vim'
 Plug 'neoclide/coc-html',
-Plug 'rmagatti/auto-session'
+Plug 'rmagatti/auto-session', { 'config': 'AutoSessionConfig' }
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'nvim-treesitter/nvim-treesitter-context'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
@@ -76,6 +78,17 @@ Plug 'nvim-tree/nvim-web-devicons'
 call plug#end()
 
 nnoremap <F5> :UndotreeToggle<CR>
+
+" Highlight the symbol and its references when holding the cursor.
+nmap <silent> gr <Plug>(coc-references)	autocmd CursorHold * silent call CocActionAsync('highlight')
+
+function! AutoSessionConfig()
+    require("auto-session").setup {
+      log_level = "error",
+      auto_session_suppress_dirs = { "~/", "~/Projects", "~/Downloads", "/"},
+    }
+EOF
+endfunction
 
 " Vim Script
 colorscheme catppuccin
@@ -255,11 +268,15 @@ nnoremap <leader>Y gg"+yG
 "yy without line break
 nnoremap <leader>y _v$y
 
+nnoremap <leader>g :Git<CR>
 
-nnoremap <leader>ff <cmd>Telescope find_files<cr>
-nnoremap <C-p> :Telescope file_browser path=%:p:h <cr>
-nnoremap <leader>fg <cmd>Telescope live_grep<cr>
-nnoremap <leader>t :Telescope treesitter <cr>
+"Current file history
+nnoremap <leader>gh :Git log -- %<CR>
+
+nnoremap <leader>ff <cmd>Telescope find_files<cr>	nnoremap <leader>ff <cmd>Telescope find_files hidden=true<cr>
+nnoremap <C-p> :Telescope file_browser path=%:p:h <cr>	nnoremap <C-p> :Telescope file_browser path=%:p:h hidden=true <cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>	nnoremap <leader>fg <cmd>Telescope live_grep hidden=true<cr>
+nnoremap <leader>t :Telescope treesitter <cr>	nnoremap <leader>t :Telescope treesitter hidden=true <cr>
 
 nnoremap <S-m> <C-d>zz
 nnoremap <S-j> <C-u>zz

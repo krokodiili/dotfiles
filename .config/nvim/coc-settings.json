@@ -3,6 +3,7 @@
     "css",
     "markdown",
     "yaml",
+    "html",
     "json",
     "typescript",
     "typescriptreact",
@@ -24,6 +25,7 @@
   "tsserver.log": "verbose",
   "snippets.ultisnips.directories": ["UltiSnips", "~/.config/nvim/snips"],
   "yaml.schemaStore.enable": true,
+  "tailwindCSS.enable": true,
   "snippets.loadVSCodeProjectSnippets": false,
   "svelte.enable-ts-plugin": true
 }

@@ -2,6 +2,8 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 #
 #o
+powerline-daemon -q
+. /usr/share/powerline/bindings/zsh/powerline.zsh
 
 source /usr/share/nvm/init-nvm.sh
 source /home/melty/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
@@ -11,6 +13,8 @@ alias calendar=calcurse
 alias vim=nvim
 alias vi=nvim
 alias nitrogen="nitrogen $HOME/wallpapers"
+alias mouse=piper
+alias doc=zathura
 alias i3conf="vim $HOME/.config/i3/config"
 source /usr/share/nvm/init-nvm.sh
 export ANDROID_HOME=$HOME/Library/Android/sdk
