@@ -1,7 +1,9 @@
 set $mod Mod4
 ####################################
 
-exec --no-startup-id udiskie
+exec --no-startup-id redshift-gtk
+exec --no-startup-id earlyoom
+exec --no-startup-id udiskie --tray
 #Audio
 exec --no-startup-id nm-applet
 # Pulse Audio controls
@@ -12,7 +14,6 @@ bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle
 exec --no-startup-id xrdb ~/.Xresources
 exec_always --no-startup-id ~/scripts/home_screens.sh
 exec --no-startup-id blueman-applet
-exec --no-startup-id ~/scripts/disp-auto
 exec --no-startup-id ~/scripts/switch_caps_escape.sh
 exec --no-startup-id ~/scripts/init_apps.sh
 exec --no-startup-id libinput-gestures-setup start
@@ -38,6 +39,16 @@ exec_always --no-startup-id picom --config ~/.config/picom.conf
 #exec --no-startup-id xmodmap -e "pointer = 3 2 1"
 
 #####################################
+bindsym Print exec flameshot gui
+
+bindsym $mod+b exec bookmarks
+
+# lock
+bindsym $mod+F11 exec ~/scripts/lock.sh
+# suspend
+bindsym $mod+F12 exec systemctl suspend
+
+
 
 # move focused workspace between monitors
 bindsym $mod+Ctrl+k move workspace to output up
@@ -201,18 +212,9 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 #leftright mouse
-bindsym $mod+F1 xmodmap -e "pointer = 3 2 1"
-bindsym $mod+F2 xmodmap -e "pointer = 1 2 3"
+bindsym $mod+F1 exec xmodmap -e "pointer = 3 2 1"
+bindsym $mod+F2 exec xmodmap -e "pointer = 1 2 3"
 
-
-bindsym Print exec flameshot gui
-
-bindsym $mod+b exec bookmarks
-
-# lock
-bindsym $mod+F11 exec ~/scripts/lock.sh
-# suspend
-bindsym $mod+F12 exec systemctl suspend
 
 # Configure border style <normal|1pixel|pixel xx|none|pixel>
 default_border pixel 4

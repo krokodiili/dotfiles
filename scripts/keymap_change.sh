@@ -7,4 +7,5 @@ then
 else
   $(setxkbmap us)
 fi
+xmodmap ~/.Xmodmap
 

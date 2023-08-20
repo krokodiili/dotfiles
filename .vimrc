@@ -1,21 +1,61 @@
+"Plugs ------------------------------------
+call plug#begin()
+Plug 'dmmulroy/tsc.nvim'
+Plug 'nvim-pack/nvim-spectre'
+Plug 'mlaursen/vim-react-snippets'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'adelarsq/vim-matchit' " % works with html tags n stuff
+Plug 'nvim-lua/plenary.nvim'
+Plug 'ThePrimeagen/harpoon'
+Plug 'lewis6991/gitsigns.nvim'
+Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.0' }
+Plug 'ryanoasis/vim-devicons'
+Plug 'nvim-telescope/telescope-file-browser.nvim'
+Plug 'smithbm2316/centerpad.nvim'
+Plug 'tommcdo/vim-fubitive'         " Bitbucket
+Plug 'catppuccin/nvim', {'as': 'catppuccin'}
+Plug 'zivyangll/git-blame.vim'
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
+Plug 'norcalli/nvim-colorizer.lua'
+Plug 'junegunn/goyo.vim'
+Plug 'jiangmiao/auto-pairs'
+Plug 'rust-lang/rust.vim'
+Plug 'alvan/vim-closetag'
+Plug 'AndrewRadev/tagalong.vim'
+Plug 'tpope/vim-surround' "change the surrounding thing with cs
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+Plug 'airblade/vim-gitgutter'     " Show git diff of lines edited
+Plug 'tpope/vim-fugitive'         " :Gblame
+Plug 'tpope/vim-rhubarb'          " :GBrowse
+Plug 'tpope/vim-commentary' "gcc
+Plug 'mattn/emmet-vim'
+Plug 'rmagatti/auto-session', { 'config': 'AutoSessionConfig' }
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'nvim-treesitter/nvim-treesitter-context'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'mattn/emmet-vim'
+Plug 'mbbill/undotree'
+Plug 'nvim-tree/nvim-web-devicons'
+call plug#end()
+
+
+let g:closetag_xhtml_filenames = '*.xhtml,*.jsx,*.tsx'
+
+
 source $HOME/.config/nvim/themes/airline.vim
-set nocompatible " be iMproved, required
 set undodir=~/.vim/undo-dir
 set undofile
 
 let mapleader = " " " map leader to Space
 
-syntax enable
-filetype plugin indent on
-
 "rust format on save
 let g:rustfmt_autosave = 1
-filetype off     " required
 ":set autochdir
 set scrolloff=8
 set number
 set expandtab
-set smartindent
 set relativenumber
 
 autocmd BufEnter *.{js,jsx,ts,tsx} :syntax sync fromstart
@@ -28,55 +68,6 @@ set fileencodings=utf-8
 
 "au BufWrite * :Autoformat
 command! -nargs=0 Prettier :call CocAction('runCommand', 'prettier.formatFile')
-call plug#begin()
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'nvim-lua/plenary.nvim'
-Plug 'ThePrimeagen/harpoon'
-Plug 'lewis6991/gitsigns.nvim'
-
-Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.0' }
-Plug 'ryanoasis/vim-devicons'
-Plug 'nvim-telescope/telescope-file-browser.nvim'
-Plug 'smithbm2316/centerpad.nvim'
-Plug 'catppuccin/nvim', {'as': 'catppuccin'}
-Plug 'gko/vim-coloresque'
-Plug 'zivyangll/git-blame.vim'
-Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
-Plug 'neoclide/coc-yaml'
-Plug 'norcalli/nvim-colorizer.lua'
-Plug 'junegunn/goyo.vim'
-Plug 'jiangmiao/auto-pairs'
-Plug 'mg979/vim-visual-multi', {'branch': 'master'}
-Plug 'rust-lang/rust.vim'
-Plug 'Chiel92/vim-autoformat'
-Plug 'alvan/vim-closetag'
-Plug 'AndrewRadev/tagalong.vim'
-Plug 'maxmellon/vim-jsx-pretty'
-Plug 'tpope/vim-surround'
-Plug 'pangloss/vim-javascript'
-Plug 'leafgarland/typescript-vim'
-Plug 'peitalin/vim-jsx-typescript'
-Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
-Plug 'jparise/vim-graphql'
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
-Plug 'airblade/vim-gitgutter'     " Show git diff of lines edited
-Plug 'tpope/vim-unimpaired'
-Plug 'tpope/vim-fugitive'         " :Gblame
-Plug 'tpope/vim-rhubarb'          " :GBrowse
-Plug 'tpope/vim-commentary'
-Plug 'mattn/emmet-vim'
-Plug 'neoclide/coc-html',
-Plug 'rmagatti/auto-session', { 'config': 'AutoSessionConfig' }
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'nvim-treesitter/nvim-treesitter-context'
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-Plug 'mattn/emmet-vim'
-Plug 'mbbill/undotree'
-Plug 'nvim-tree/nvim-web-devicons'
-call plug#end()
-
 nnoremap <F5> :UndotreeToggle<CR>
 
 " Highlight the symbol and its references when holding the cursor.
@@ -98,7 +89,8 @@ let g:user_emmet_leader_key=","
 
 
 " CoC extensions
-let g:coc_global_extensions = ['coc-tsserver', "coc-emmet", 'coc-json', 'coc-eslint', 'coc-prettier', 'coc-snippets', 'coc-yaml']
+let g:coc_global_extensions = ['coc-tsserver', "coc-emmet", 'coc-json', 'coc-eslint', 'coc-prettier', 'coc-snippets', 'coc-yaml', 'coc-groovy', 'coc-html']
+
 
 
 "console.log visually selected to the next line
@@ -113,6 +105,9 @@ nnoremap <silent><leader>z <cmd>Centerpad<cr>
 vmap <leader>f  <Plug>(coc-format-selected)
 nmap <leader>f  <Plug>(coc-format-selected)
 
+nnoremap <leader>p :e#n<CR>
+nnoremap <leader>e `.<CR>
+
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 
@@ -123,11 +118,6 @@ nmap <silent> gr <Plug>(coc-references)
 set number
 set numberwidth=4
 set ruler
-
-" Indentation
-set autoindent
-set cindent
-set smartindent
 
 " Disable backups and swap files
 set nobackup
