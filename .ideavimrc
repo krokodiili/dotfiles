@@ -1,0 +1,59 @@
+set nocompatible
+
+set number
+set relativenumber
+
+set encoding=utf-8
+
+" Tab Options
+set shiftwidth=2
+set tabstop=2
+set softtabstop=2 " Number of spaces a tab counts when editing
+set expandtab
+
+" Indentation
+set autoindent
+set cindent
+set smartindent
+
+" Ignore case when searching
+set ignorecase
+" When searching try to be smart about cases
+set smartcase
+" Don't highlight search term
+set nohlsearch
+" Jumping search
+set incsearch
+
+set laststatus=2
+set ruler
+
+" Spellcheck for features and markdown
+au BufRead,BufNewFile *.md setlocal spell
+au BufRead,BufNewFile *.md.erb setlocal spell
+au BufRead,BufNewFile *.feature setlocal spell
+
+" Delete characters outside of insert area
+set backspace=indent,eol,start
+
+" Faster saving and exiting
+nnoremap <silent><leader>w :w!<CR>
+nnoremap <silent><leader>q :q!<CR>
+nnoremap <silent><leader>x :x<CR>
+
+" Toggle relative line numbers
+nnoremap <leader>rn :set relativenumber!<cr>
+
+nnoremap <silent><leader>v :vsplit<CR><C-w>l
+
+nnoremap <silent><leader>rn :set relativenumber!<cr>
+
+" GoTo code navigation.
+nmap <silent> gd :action GotoDefinition<CR>
+nmap <silent> gi :action GotoImplementation<CR>
+nmap <silent> gr :action GotoReferences<CR>
+
+" Symbol renaming.
+nmap <leader>rn :action RenameElement<CR>
+
+nmap <Leader>ff :action SearchEverywhere<CR>
