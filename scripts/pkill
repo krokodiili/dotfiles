@@ -1,0 +1,16 @@
+#!/bin/zsh
+
+if [ -z "$1" ]
+then
+    echo "Usage: $0 <port>"
+    exit 1
+fi
+
+PID=$(lsof -t -i:$1)
+if [ -z "$PID" ]
+then
+    echo "No process found on port $1."
+else
+    kill -9 $PID
+    echo "Process on port $1 killed."
+fi
