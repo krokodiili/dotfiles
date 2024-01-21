@@ -1,5 +1,3 @@
-#!/bin/zsh
-
 # https://github.com/zxvfxwing
 # q? -> zxvfxwing@protonmail.com
 
@@ -63,30 +61,29 @@
 
 # App you want to start :
 apps=(
-"brave"
-"slack"
+	"brave"
+	"slack"
+	"1password"
 )
 
 # Which workspace assign to your wanted App :
 workspaces=(
-"1"
-"4"
+	"1"
+	"4"
+	"6"
 )
 
 # counter of opened windows
 owNB=0
 
-for iwin in ${!apps[*]}
-do
-    while [ "$owNB" -lt "$iwin" ] # wait before start other programs
-    do
-        owNB=$(wmctrl -l | wc -l) # Get number of actual opened windows
-    done
+for iwin in ${!apps[*]}; do
+	while [ "$owNB" -lt "$iwin" ]; do # wait before start other programs
+		owNB=$(wmctrl -l | wc -l)        # Get number of actual opened windows
+	done
 
-    i3-msg workspace ${workspaces[$iwin]} # move in wanted workspace
-    /usr/bin/${apps[$iwin]} & # start the wanted app
+	i3-msg workspace ${workspaces[$iwin]} # move in wanted workspace
+	/usr/bin/${apps[$iwin]} &             # start the wanted app
 done
-
 
 ####### ABSOLUTELY OPTIONAL ########
 ## inject message(s) into terminal (first one created : /dev/pts/0)
