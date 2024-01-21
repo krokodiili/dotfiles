@@ -4,12 +4,12 @@ set $mod Mod4
 
 # STARTS #
 #exec --no-startup-id fcitx5 -d
-
+exec --no-startup-id lxqt-policykit-agent
+exec --no-startup-id light-locker
 exec_always --no-startup-id ~/scripts/home_screens.sh
 exec --no-startup-id redshift-gtk
 exec --no-startup-id earlyoom
 exec --no-startup-id dunst
-exec --no-startup-id easyeffects
 exec --no-startup-id batsignal
 exec --no-startup-id udiskie &
 exec --no-startup-id ~/scripts/home_screens.sh
@@ -18,8 +18,6 @@ exec --no-startup-id ~/scripts/init_apps.sh
 exec --no-startup-id flameshot
 exec --no-startup-id blueman-applet
 exec --no-startup-id nm-applet
-
-
 
 # Hide mouse
 exec --no-startup-id unclutter -idle 1
@@ -30,8 +28,9 @@ exec --no-startup-id unclutter -idle 1
 # There is a freeze drop issue with GLX
 exec --no-startup-id picom --config ~/.config/picom.conf
 
-#Audio
+bindsym $mod+x exec ~/scripts/conf
 
+#Audio
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5%
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5%
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
@@ -126,9 +125,6 @@ bindsym $mod+e layout toggle split
 
 # toggle tiling / floating
 bindsym $mod+Shift+x floating toggle
-
-# change focus between tiling / floating windows
-bindsym $mod+x focus mode_toggle
 
 # focus the parent container
 # bindsym $mod+a focus parent
@@ -236,16 +232,10 @@ bindsym Print exec flameshot gui
 
 bindsym $mod+b exec bookmarks
 
-# lock
-bindsym $mod+F11 exec ~/scripts/lock.sh
-
-# suspend
-bindsym $mod+F12 exec ~/scripts/lock.sh -s
-
 # Configure border style <normal|1pixel|pixel xx|none|pixel>
 default_border pixel 4
 default_floating_border pixel 0
-for_window [class="^.*"] border pixel 4
+#for_window [class="^.*"] border pixel 4
 
 # Hide borders
 hide_edge_borders none
@@ -288,13 +278,11 @@ client.background        $base
 
 # Open applications on specific workspaces
 #assign [class="firefox"] $ws1
-#for_window [class="Nitrogen"] floating enable sticky enable border normal
+for_window [class="vlc"] floating enable sticky enable border 1 
 # Gaps
 #smart_gaps on
 #smart_borders on
-gaps inner 10
-gaps outer 4
-gaps bottom 40
+gaps bottom 50
 
 # Smart borders (draw borders around container only if it is not the only container on this workspace)
 # on|no_gaps (on=always activate and no_gaps=only activate if the gap size to the edge of the screen is 0)
