@@ -1,6 +1,10 @@
   QT_IM_MODULE=fcitx
   XMODIFIERS=@im=fcitx
 
+  dsi() { docker stop $(docker ps -a | awk -v i="^$1.*" '{if($2~i){print$1}}'); }
+
+  GIT_PROMPT_END=" [\${AWS_PROFILE}]\n\A $ "
+
   export NVM_DIR=~/.nvm
   export JAVA_HOME="/opt/android-studio/jbr"
   export PIPEWIRE_CONFIG_FILE="$HOME/.config/pipewire/pipewire.conf"
@@ -38,13 +42,14 @@ fi
 
 ## OH_MY
 ZSH_THEME="robbyrussell"
-plugins=(git npm zsh-autosuggestions zsh-syntax-highlighting 1password)
+plugins=(git npm zsh-autosuggestions zsh-syntax-highlighting 1password aws)
 
 ## SOURCE
 
 source $ZSH/oh-my-zsh.sh
-source /usr/share/nvm/init-nvm.sh
+#source /usr/share/nvm/init-nvm.sh
 source /etc/profile.d/google-cloud-cli.sh
+source ~/.nvm/nvm.sh
 ## ALIAS
 
 alias rando='openssl rand -base64 32'
@@ -66,9 +71,28 @@ alias nitrogen="nitrogen $HOME/wallpapers"
 alias i3conf="vim $HOME/.config/i3/config"
 alias ls='lsd'
 alias grep="rg --color=auto"
-alias mleft='xmodmap -e "pointer = 3 2 1"'
-alias mright='xmodmap -e "pointer = 1 2 3"'
 
 
+function switch-profile() {
+  identity=$(aws sts get-caller-identity --profile $1)
+  if [ "$?" -eq 0 ]; then
+    export AWS_PROFILE=$1
+    echo $identity
+  else
+    echo "Profile not active! Logging in..."
+    aws sso login --profile $1
+    aws sts get-caller-identity --profile $1
+    export AWS_PROFILE=$1
+  fi
+}
 
+# pnpm
+export PNPM_HOME="/home/$USER/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
 
+# Created by `pipx` on 2023-12-14 10:03:22
+export PATH="$PATH:/home/$USER/.local/bin"
