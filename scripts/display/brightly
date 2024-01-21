@@ -1,0 +1,10 @@
+# Update the environment variables
+export WORK_MONITOR="DP-2"
+export SIDE_MONITOR="eDP-1"
+
+autorandr brightly
+~/scripts/home_screens.sh
+mright
+
+sed -i "s/^export WORK_MONITOR=.*/export WORK_MONITOR=\"$WORK_MONITOR\"/" ~/.zshenv
+sed -i "s/^export SIDE_MONITOR=.*/export SIDE_MONITOR=\"$SIDE_MONITOR\"/" ~/.zshenv
