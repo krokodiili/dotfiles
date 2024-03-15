@@ -1,13 +1,19 @@
-#!/bin/env bash
-#https://github.com/ankitpokhrel/jira-cli
-#chmod +x & alias shelli conffiin
+#!/bin/zsh
+# https://github.com/ankitpokhrel/jira-cli < install this
+# brew tap ankitpokhrel/jira-cli
+# brew install jira-cli
+# https://id.atlassian.com/manage-profile/security/api-tokens
+# zshenv -> export JIRA_API_TOKEN=XXX
+# DONT PUT JIRA_AUTH_TYPE=bearer for cloud server to save your hairline
+# jira init --installation cloud --server "https://XXX.atlassian.net" --login "XXX" --debug
+# chmod +x & alias this script in your .zshrc alias tiksu='$USER/scripts/tiksu' or so
 
 echo Tiksun otsikko
 read title
 echo Tiksun kuvaus
 read description
 
-TICKET=$(jira issue create -tTask -s"$title" -b"$description" --no-input | tail -1 | sed "s/[^(0-9)|JKB-]//g")
+TICKET=$(jira issue create -tTask -s"$title" -b"$description" --no-input | tail -1 | sed 's|.*/||')
 
 jira issue assign $TICKET $(jira me)
 
@@ -17,7 +23,3 @@ echo $SPRINT
 jira sprint add $SPRINT $TICKET
 
 jira issue view $TICKET
-
-
-
-
