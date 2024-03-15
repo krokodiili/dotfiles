@@ -1,5 +1,6 @@
   QT_IM_MODULE=fcitx
   XMODIFIERS=@im=fcitx
+ export MANPATH="/usr/local/man:$MANPATH"
 
   dsi() { docker stop $(docker ps -a | awk -v i="^$1.*" '{if($2~i){print$1}}'); }
 
@@ -71,6 +72,7 @@ alias nitrogen="nitrogen $HOME/wallpapers"
 alias i3conf="vim $HOME/.config/i3/config"
 alias ls='lsd'
 alias grep="rg --color=auto"
+alias tmux='tmux -f ~/.config/tmux/tmux.conf'
 
 
 function switch-profile() {
