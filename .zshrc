@@ -43,13 +43,13 @@ fi
 
 ## OH_MY
 ZSH_THEME="robbyrussell"
-plugins=(git npm zsh-autosuggestions zsh-syntax-highlighting 1password aws)
+plugins=(git sudo zsh-256color zsh-autosuggestions zsh-syntax-highlighting)
 
 ## SOURCE
 
 source $ZSH/oh-my-zsh.sh
 #source /usr/share/nvm/init-nvm.sh
-source /etc/profile.d/google-cloud-cli.sh
+#source /etc/profile.d/google-cloud-cli.sh
 source ~/.nvm/nvm.sh
 ## ALIAS
 
@@ -98,3 +98,7 @@ esac
 
 # Created by `pipx` on 2023-12-14 10:03:22
 export PATH="$PATH:/home/$USER/.local/bin"
+
+  if [ -f $HOME/.zshenv ]; then
+           source $HOME/.zshenv
+   fi

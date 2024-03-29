@@ -1,6 +1,31 @@
-#!/bin/sh
+#!/bin/zsh
 
-PID=$(xprop -id "$(xprop -root | awk '/_NET_ACTIVE_WINDOW\(WINDOW\)/{print $NF}')" | grep -m 1 PID | cut -d " " -f 3)
-PID="$(pstree -lpA "$PID" | tail -n 1 | awk -F'---' '{print $NF}' | sed -re 's/[^0-9]//g')"
-cd "$(readlink /proc/"$PID"/cwd)" || return 1
-"$TERMINAL"
+# Get the output of hyprctl activewindow
+HYPRCTL_OUTPUT=$(hyprctl activewindow)
+
+# Print the output for debugging
+echo "HYPRCTL_OUTPUT: $HYPRCTL_OUTPUT"
+
+# Extract the PID from the output
+PID=$(echo "$HYPRCTL_OUTPUT" | awk '/pid:/{print $NF}')
+
+# Print the PID for debugging
+echo "PID: $PID"
+
+# Use the PID to get the process tree
+PID_TREE=$(pstree -lpA "$PID" | tail -n 1 | awk -F'---' '{print $NF}' | sed -re 's/[^0-9]//g')
+
+# Print the process tree PID for debugging
+echo "PID_TREE: $PID_TREE"
+
+# Get the process's current working directory
+CWD=$(readlink /proc/"$PID_TREE"/cwd)
+
+# Print the current working directory for debugging
+echo "CWD: $CWD"
+
+# Change directory to the process's current working directory
+cd "$CWD" || return 1
+
+# Open the terminal
+kitty

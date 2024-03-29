@@ -7,14 +7,79 @@
 -- * disable/enabled LazyVim plugins
 -- * override the configuration of LazyVim plugins
 return {
-  { "rose-pine/neovim", name = "rose-pine" },
- 
-
-  -- Configure LazyVim to load gruvbox
+  -- { "rose-pine/neovim", name = "rose-pine" },
+  -- { "Mofiqul/dracula.nvim",
+  --   name = "dracula",
+  --   opts = {
+  --     transparent_bg = true,
+  --     italic_comment = true
+  --   }
+  -- },
+  {"brenoprata10/nvim-highlight-colors",
+    config = function()
+      vim.opt.termguicolors = true
+      require('nvim-highlight-colors').setup({})
+    end,
+  },
   {
+  "nvim-neo-tree/neo-tree.nvim",
+    enabled = false
+  },
+
+  {
+  "stevearc/conform.nvim",
+    opts = {
+  formatters_by_ft = {
+    ['lua'] = {"stylua"},
+    ["javascript"] = { "prettier" },
+    ["javascriptreact"] = { "prettier" },
+    ["typescript"] = { "prettier" },
+    ["typescriptreact"] = { "prettier" },
+    ["vue"] = { "prettier" },
+    ["css"] = { "prettier" },
+    ["scss"] = { "prettier" },
+    ["less"] = { "prettier" },
+    ["html"] = { "prettier" },
+    ["json"] = { "prettier" },
+    ["jsonc"] = { "prettier" },
+    ["yaml"] = { "prettier" },
+    ["markdown"] = { "prettier" },
+    ["markdown.mdx"] = { "prettier" },
+    ["graphql"] = { "prettier" },
+    ["handlebars"] = { "prettier" },
+  },
+}
+  },
+
+  {
+  "folke/flash.nvim",
+    enabled = false
+  },
+  { "echasnovski/mini.surround",
+    opts = {
+
+  mappings = {
+    add = "gsa", -- Add surrounding in Normal and Visual modes
+    delete = "gsd", -- Delete surrounding
+    find = "gsf", -- Find surrounding (to the right)
+    find_left = "gsF", -- Find surrounding (to the left)
+    highlight = "gsh", -- Highlight surrounding
+    replace = "gsr", -- Replace surrounding
+    update_n_lines = "gsn", -- Update `n_lines`
+
+
+
+    }
+  },
+
+  },
+  {'tpope/vim-fugitive'},
+  {'sudormrfbin/cheatsheet.nvim'},
+  -- Configure LazyVim to load gruvbox
+ {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "rose-pine",
+      --colorscheme = "dracula",
     },
   },
   {
@@ -38,19 +103,35 @@ return {
     keys = { { "<leader>cs", "<cmd>SymbolsOutline<cr>", desc = "Symbols Outline" } },
     config = true,
   },
-
-  -- add telescope-fzf-native
   {
-    "telescope.nvim",
+  "telescope.nvim",
+    lazy = false,
+    extensions = {
+      file_browser = {
+        hijack_netrw = true,
+      },
+    },
+    keys = {
+      {"<C-p>", "<cmd>Telescope file_browser path=%:p:h hidden=true all=true<cr><esc>", desc = "File browser"},
+    },
     dependencies = {
-      "nvim-telescope/telescope-fzf-native.nvim",
-      build = "make",
-      config = function()
-        require("telescope").load_extension("fzf")
-      end,
+      {
+        "nvim-telescope/telescope-file-browser.nvim",
+        build = "make",
+        dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" },
+        config = function()
+          require('telescope').load_extension('file_browser')
+        end,
+      },
+      {
+        "nvim-telescope/telescope-fzf-native.nvim",
+        build = "make",
+        config = function()
+          require("telescope").load_extension("fzf")
+        end,
     },
   },
-
+  },
   -- add tsserver and setup with typescript.nvim instead of lspconfig
   {
     "neovim/nvim-lspconfig",
@@ -173,7 +254,7 @@ return {
     end,
     event = "VeryLazy",
     keys = {
-      { "<leader>ccb", ":CopilotChatBuffer ", desc = "CopilotChat - Chat with current buffer" },
+ 
       { "<leader>cce", "<cmd>CopilotChatExplain<cr>", desc = "CopilotChat - Explain code" },
       { "<leader>cct", "<cmd>CopilotChatTests<cr>", desc = "CopilotChat - Generate tests" },
       {
@@ -202,9 +283,19 @@ return {
         "<leader>ccr",
         "<cmd>CopilotChatReset<cr>", -- Reset chat history and clear buffer.
         desc = "CopilotChat - Reset chat history and clear buffer",
-      }
+      },
+      {
+"<leader>ccb",
+    function()
+      local input = vim.fn.input("Quick Chat: ")
+      if input ~= "" then
+        require("CopilotChat").ask(input, { selection = require("CopilotChat.select").buffer })
+      end
+    end,
+    desc = "CopilotChat - Quick chat",
+  }
+    }
     },
-  },
   -- then: setup supertab in cmp
   {
     "hrsh7th/nvim-cmp",
