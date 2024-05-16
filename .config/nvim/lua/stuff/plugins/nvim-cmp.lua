@@ -22,7 +22,6 @@ return {
     local luasnip = require("luasnip")
 
     local lspkind = require("lspkind")
-
     -- loads vscode style snippets from installed plugins (e.g. friendly-snippets)
     require("luasnip.loaders.from_vscode").lazy_load()
 
@@ -46,10 +45,12 @@ return {
       }),
       -- sources for autocompletion
       sources = cmp.config.sources({
+        { name = "copilot" },
         { name = "nvim_lsp" },
         { name = "luasnip" }, -- snippets
         { name = "buffer" }, -- text within current buffer
         { name = "path" }, -- file system paths
+        { name = "emoji" },
       }),
 
       -- configure lspkind for vs-code like pictograms in completion menu

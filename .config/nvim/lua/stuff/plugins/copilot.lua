@@ -1,9 +1,5 @@
 return {
-  {
-    "zbirenbaum/copilot.lua",
-    cmd = "Copilot",
-    event = "InsertEnter",
-  },
+  { "github/copilot.vim" },
   {
     "CopilotC-Nvim/CopilotChat.nvim",
     opts = {
