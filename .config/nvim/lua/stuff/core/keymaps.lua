@@ -1,6 +1,8 @@
 -- Keymaps are automatically loaded on the VeryLazy event
 -- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 -- Add any additional keymaps here-- Normal mode mappings for <S-m> and <S-j>
+vim.g.mapleader = " "
+
 local keymap = vim.api.nvim_set_keymap
 local opts = { noremap = true, silent = true }
 
@@ -44,3 +46,5 @@ keymap("v", "J", ":m '>+1<CR>gv=gv", opts)
 keymap("v", "K", ":m '<-2<CR>gv=gv", opts)
 
 keymap("n", "<leader>l", "_v$", opts)
+keymap("n", "<leader>q", ":q<CR>", opts)
+keymap("n", "<C-s>", ":w<CR>", opts)
