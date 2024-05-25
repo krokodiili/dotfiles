@@ -3,7 +3,8 @@
 -- Add any additional options here
 --
 local opt = vim.opt
-opt.tabstop = 2 -- 2 spaces for tabs (prettier default)
+opt.tabstop = 4 -- 4 spaces for tabs visually
+opt.softtabstop = 4 -- 4 spaces for tabs visually when editing
 opt.shiftwidth = 2 -- 2 spaces for indent width
 opt.expandtab = true -- expand tab to spaces
 opt.autoindent = true -- copy indent from current line when starting new one

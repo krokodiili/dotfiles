@@ -45,6 +45,9 @@ keymap("v", "<S-j>", "<C-u>zz", opts)
 keymap("v", "J", ":m '>+1<CR>gv=gv", opts)
 keymap("v", "K", ":m '<-2<CR>gv=gv", opts)
 
+keymap("n", "-", ":Oil<CR>", opts)
 keymap("n", "<leader>l", "_v$", opts)
 keymap("n", "<leader>q", ":q!<CR>", opts)
 keymap("n", "<C-s>", ":w<CR>", opts)
+
+keymap("n", "<leader>e", ":Neotree<CR>", opts)
