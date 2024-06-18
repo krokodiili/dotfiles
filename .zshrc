@@ -102,3 +102,6 @@ export PATH="$PATH:/home/$USER/.local/bin"
   if [ -f $HOME/.zshenv ]; then
            source $HOME/.zshenv
    fi
+
+
+eval $(thefuck --alias)
