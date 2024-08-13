@@ -3,8 +3,10 @@
  export MANPATH="/usr/local/man:$MANPATH"
 
   dsi() { docker stop $(docker ps -a | awk -v i="^$1.*" '{if($2~i){print$1}}'); }
+export ZSH="$HOME/.oh-my-zsh"
 
   GIT_PROMPT_END=" [\${AWS_PROFILE}]\n\A $ "
+ZSH_THEME="xiong-chiamiov-plus"
 
   export NVM_DIR=~/.nvm
   export JAVA_HOME="/opt/android-studio/jbr"
@@ -46,6 +48,12 @@ ZSH_THEME="robbyrussell"
 plugins=(git sudo zsh-256color zsh-autosuggestions zsh-syntax-highlighting)
 
 ## SOURCE
+plugins=( 
+    git
+    dnf
+    zsh-autosuggestions
+    zsh-syntax-highlighting
+)
 
 source $ZSH/oh-my-zsh.sh
 #source /usr/share/nvm/init-nvm.sh
@@ -87,6 +95,8 @@ function switch-profile() {
     export AWS_PROFILE=$1
   fi
 }
+# check the dnf plugins commands here
+# https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/dnf
 
 # pnpm
 export PNPM_HOME="/home/$USER/.local/share/pnpm"
@@ -102,6 +112,16 @@ export PATH="$PATH:/home/$USER/.local/bin"
   if [ -f $HOME/.zshenv ]; then
            source $HOME/.zshenv
    fi
+# Set-up FZF key bindings (CTRL R for fuzzy history finder)
+source <(fzf --zsh)
 
+HISTFILE=~/.zsh_history
+HISTSIZE=10000
+SAVEHIST=10000
+setopt appendhistory
 
 eval $(thefuck --alias)
+# Set-up icons for files/folders in terminal using eza
+#alias ls='eza -a --icons'
+#alias ll='eza -al --icons'
+#alias lt='eza -a --tree --level=1 --icons'
