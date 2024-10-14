@@ -35,3 +35,6 @@ opt.splitbelow = true -- split horizontal window to the bottom
 opt.swapfile = false
 opt.scrolloff = 16
 opt.fileformat = "unix"
+
+opt.termguicolors = true
+vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"

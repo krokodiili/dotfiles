@@ -6,7 +6,7 @@
 export ZSH="$HOME/.oh-my-zsh"
 
   GIT_PROMPT_END=" [\${AWS_PROFILE}]\n\A $ "
-ZSH_THEME="xiong-chiamiov-plus"
+  ZSH_THEME="xiong-chiamiov-plus"
 
   export NVM_DIR=~/.nvm
   export JAVA_HOME="/opt/android-studio/jbr"
@@ -44,7 +44,6 @@ else
 fi
 
 ## OH_MY
-ZSH_THEME="robbyrussell"
 plugins=(git sudo zsh-256color zsh-autosuggestions zsh-syntax-highlighting)
 
 ## SOURCE
@@ -78,7 +77,6 @@ alias top=btop
 alias poly="~/scripts/polybar/lauch.sh"
 alias nitrogen="nitrogen $HOME/wallpapers"
 alias i3conf="vim $HOME/.config/i3/config"
-alias ls='lsd'
 alias grep="rg --color=auto"
 alias tmux='tmux -f ~/.config/tmux/tmux.conf'
 
@@ -122,6 +120,6 @@ setopt appendhistory
 
 eval $(thefuck --alias)
 # Set-up icons for files/folders in terminal using eza
-#alias ls='eza -a --icons'
-#alias ll='eza -al --icons'
-#alias lt='eza -a --tree --level=1 --icons'
+alias ls='eza -a --icons'
+alias ll='eza -al --icons'
+alias lt='eza -a --tree --level=1 --icons'

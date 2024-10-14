@@ -1,3 +1,4 @@
+-- Highlight todo comments, search for them
 return {
   "folke/todo-comments.nvim",
   event = { "BufReadPre", "BufNewFile" },
@@ -7,6 +8,8 @@ return {
 
     -- set keymaps
     local keymap = vim.keymap -- for conciseness
+
+    keymap.set("n", "<leader>td", ":TodoTelescope<cr>", { desc = "Search for todo comments" })
 
     keymap.set("n", "]t", function()
       todo_comments.jump_next()
