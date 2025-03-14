@@ -19,7 +19,8 @@ jira issue assign $TICKET $(jira me)
 
 SPRINT=$(jira sprint list --table | grep active | sed 's/\t.*//')
 
-echo $SPRINT
-jira sprint add $SPRINT $TICKET
+#not working atm
+#jira sprint add $SPRINT $TICKET
+xdg-open https://postinext.atlassian.net/browse/$TICKET
 
-jira issue view $TICKET
+#jira issue view $TICKET

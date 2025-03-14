@@ -19,6 +19,11 @@ export ZSH="$HOME/.oh-my-zsh"
   export PATH=$PATH:$ANDROID_HOME/tools/bin
   export PATH=$PATH:$ANDROID_HOME/platform-tools
 
+  # GO
+  export GOPATH=$HOME/go 
+  export PATH=$PATH:$GOPATH/bin
+
+
   export SSH_LOCATION=$HOME/.ssh
   export PATH=$PATH:$HOME/scripts
   export PATH=$PATH:$HOME/.cargo/bin
@@ -123,3 +128,10 @@ eval $(thefuck --alias)
 alias ls='eza -a --icons'
 alias ll='eza -al --icons'
 alias lt='eza -a --tree --level=1 --icons'
+
+# bun completions
+[ -s "/home/melty/.bun/_bun" ] && source "/home/melty/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
