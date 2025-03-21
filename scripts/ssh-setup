@@ -1,0 +1,23 @@
+#!/bin/bash
+
+# Set public/private key permissions
+
+# Octal form
+chmod 600 ~/.ssh/id_rsa
+chmod 600 ~/.ssh/id_rsa.pub
+
+# Equivalent literal form
+chmod u=rw,go= ~/.ssh/id_rsa ~/.ssh/id_rsa.pub
+
+# Optional: make public key readable
+chmod 644 ~/.ssh/id_rsa.pub # chmod a=r,u+w ~/.ssh/id_rsa.pub
+
+# Set directory permissions
+chmod 700 ~/.ssh # chmod u=rwx,go= ~/.ssh
+
+# Legend for literal form
+# +: allow       -: deny         =: reset and allow
+# u: user        r: read
+# g: group       w: write
+# o: others      x: execute
+# a: all

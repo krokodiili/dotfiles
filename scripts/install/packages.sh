@@ -91,6 +91,8 @@ packages=(
   joplin
   tidal-dl
   tidal-hifi-bin
+  aws-cli-v2
+  github-cli
 )
 
 for PKG2 in "${packages[@]}"; do
