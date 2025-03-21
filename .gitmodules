@@ -1,0 +1,3 @@
+[submodule "scripts/install/Arch-Hyprland"]
+	path = scripts/install/Arch-Hyprland
+	url = https://github.com/JaKooLit/Arch-Hyprland.git
