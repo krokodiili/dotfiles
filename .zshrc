@@ -1,43 +1,43 @@
-  QT_IM_MODULE=fcitx
-  XMODIFIERS=@im=fcitx
  export MANPATH="/usr/local/man:$MANPATH"
 
+dsi() { docker stop $(docker ps -a | awk -v i="^$1.*" '{if($2~i){print$1}}'); }
 
-  dsi() { docker stop $(docker ps -a | awk -v i="^$1.*" '{if($2~i){print$1}}'); }
 export ZSH="$HOME/.oh-my-zsh"
 
-  GIT_PROMPT_END=" [\${AWS_PROFILE}]\n\A $ "
-  ZSH_THEME="xiong-chiamiov-plus"
+GIT_PROMPT_END=" [\${AWS_PROFILE}]\n\A $ "
+ZSH_THEME="xiong-chiamiov-plus"
+export NVM_DIR=~/.nvm
 
-  export NVM_DIR=~/.nvm
-  export JAVA_HOME="/opt/android-studio/jbr"
-  export PIPEWIRE_CONFIG_FILE="$HOME/.config/pipewire/pipewire.conf"
-
-  #ANDROID
-  export ANDROID_HOME=$HOME/Android/Sdk
-  export PATH=$PATH:$ANDROID_HOME/emulator
-  export PATH=$PATH:$ANDROID_HOME/tools
-  export PATH=$PATH:$ANDROID_HOME/tools/bin
-  export PATH=$PATH:$ANDROID_HOME/platform-tools
-
-  # GO
-  export GOPATH=$HOME/go 
-  export PATH=$PATH:$GOPATH/bin
+# SOUND
+export PIPEWIRE_CONFIG_FILE="$HOME/.config/pipewire/pipewire.conf"
 
 
-  export SSH_LOCATION=$HOME/.ssh
-  export PATH=$PATH:$HOME/scripts
-  export PATH=$PATH:$HOME/.cargo/bin
+# ANDROID
+export JAVA_HOME="/opt/android-studio/jbr"
+export ANDROID_HOME=$HOME/Android/Sdk
+export PATH=$PATH:$ANDROID_HOME/emulator
+export PATH=$PATH:$ANDROID_HOME/tools
+export PATH=$PATH:$ANDROID_HOME/tools/bin
+export PATH=$PATH:$ANDROID_HOME/platform-tools
+
+# GO
+export GOPATH=$HOME/go 
+export PATH=$PATH:$GOPATH/bin
+
+
+export SSH_LOCATION=$HOME/.ssh
+export PATH=$PATH:$HOME/scripts
+export PATH=$PATH:$HOME/.cargo/bin
 
 export IDEA_JDK=/usr/lib/jvm/jre-jetbrains
-      export PHPSTORM_JDK=/usr/lib/jvm/jre-jetbrains
-      export WEBIDE_JDK=/usr/lib/jvm/jre-jetbrains
-      export PYCHARM_JDK=/usr/lib/jvm/jre-jetbrains
-      export RUBYMINE_JDK=/usr/lib/jvm/jre-jetbrains
-      export CL_JDK=/usr/lib/jvm/jre-jetbrains
-      export DATAGRIP_JDK=/usr/lib/jvm/jre-jetbrains
-      export GOLAND_JDK=/usr/lib/jvm/jre-jetbrains
-      export STUDIO_JDK=/usr/lib/jvm/jre-jetbrains
+export PHPSTORM_JDK=/usr/lib/jvm/jre-jetbrains
+export WEBIDE_JDK=/usr/lib/jvm/jre-jetbrains
+export PYCHARM_JDK=/usr/lib/jvm/jre-jetbrains
+export RUBYMINE_JDK=/usr/lib/jvm/jre-jetbrains
+export CL_JDK=/usr/lib/jvm/jre-jetbrains
+export DATAGRIP_JDK=/usr/lib/jvm/jre-jetbrains
+export GOLAND_JDK=/usr/lib/jvm/jre-jetbrains
+export STUDIO_JDK=/usr/lib/jvm/jre-jetbrains
 
 
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
@@ -50,27 +50,19 @@ else
 fi
 
 ## OH_MY
-plugins=(git sudo zsh-256color zsh-autosuggestions zsh-syntax-highlighting)
-
-## SOURCE
-plugins=( 
-    git
-    dnf
-    zsh-autosuggestions
-    zsh-syntax-highlighting
-)
+plugins=(git sudo dnf zsh-256color zsh-autosuggestions zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
-#source /usr/share/nvm/init-nvm.sh
 #source /etc/profile.d/google-cloud-cli.sh
 source ~/.nvm/nvm.sh
-## ALIAS
 
+## ALIAS
 alias open="thunar"
 alias rando='openssl rand -base64 32'
 alias vim='nvim'
 alias cat="bat"
-alias find-file="find . -type f -name"              ## Find a file with the given name
+alias find-file="find . -type f -name"  ## Find a file with the given name
+
 ## Find a file & open it with neovim
 alias ff='nvim $(fzf)'
 alias fzf="fzf --preview 'bat --style=numbers --color=always --line-range :500 {}'"
@@ -97,6 +89,7 @@ function switch-profile() {
     export AWS_PROFILE=$1
   fi
 }
+
 # check the dnf plugins commands here
 # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/dnf
 
@@ -111,9 +104,10 @@ esac
 # Created by `pipx` on 2023-12-14 10:03:22
 export PATH="$PATH:/home/$USER/.local/bin"
 
-  if [ -f $HOME/.zshenv ]; then
-           source $HOME/.zshenv
-   fi
+if [ -f $HOME/.zshenv ]; then
+         source $HOME/.zshenv
+fi
+
 # Set-up FZF key bindings (CTRL R for fuzzy history finder)
 source <(fzf --zsh)
 
@@ -136,6 +130,7 @@ alias orca-slicer='__GLX_VENDOR_LIBRARY_NAME=mesa __EGL_VENDOR_LIBRARY_FILENAMES
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
+# pyenv
 export PYENV_ROOT="$HOME/.pyenv"
 [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init - zsh)"
