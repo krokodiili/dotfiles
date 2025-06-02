@@ -1,3 +1,5 @@
+export PATH=$PATH:$HOME/flutter/bin
+export PATH=$PATH:$HOME/android-studio/bin
   QT_IM_MODULE=fcitx
   XMODIFIERS=@im=fcitx
  export MANPATH="/usr/local/man:$MANPATH"
@@ -9,7 +11,6 @@ export ZSH="$HOME/.oh-my-zsh"
   ZSH_THEME="xiong-chiamiov-plus"
 
   export NVM_DIR=~/.nvm
-  export JAVA_HOME="/opt/android-studio/jbr"
   export PIPEWIRE_CONFIG_FILE="$HOME/.config/pipewire/pipewire.conf"
 
   #ANDROID
