@@ -86,14 +86,20 @@ packages=(
   1password
   rg
   nvm
+  bat
   thefuck
   ranger
   joplin
-  tidal-dl
-  tidal-hifi-bin
+  tmux
   aws-cli-v2
   github-cli
+  samba
+  docker
+  synology-drive
+  brave-bin
 )
+
+#TODO: exec sudo usermod -aG docker plugdev $USER
 
 for PKG2 in "${packages[@]}"; do
     install_package  "$PKG2" 2>&1 | tee -a "$LOG"

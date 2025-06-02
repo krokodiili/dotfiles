@@ -3,6 +3,7 @@
 -- Add any additional options here
 --
 local opt = vim.opt
+
 opt.tabstop = 4 -- 4 spaces for tabs visually
 opt.softtabstop = 4 -- 4 spaces for tabs visually when editing
 opt.shiftwidth = 2 -- 2 spaces for indent width
@@ -19,7 +20,6 @@ opt.smartcase = true -- if you include mixed case in your search, assumes you wa
 
 opt.cursorline = true
 
-opt.termguicolors = true
 opt.signcolumn = "yes" -- show sign column so that text doesn't shift
 
 -- backspace
@@ -35,6 +35,5 @@ opt.splitbelow = true -- split horizontal window to the bottom
 opt.swapfile = false
 opt.scrolloff = 16
 opt.fileformat = "unix"
-
 opt.termguicolors = true
 vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"

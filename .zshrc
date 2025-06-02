@@ -2,6 +2,7 @@
   XMODIFIERS=@im=fcitx
  export MANPATH="/usr/local/man:$MANPATH"
 
+
   dsi() { docker stop $(docker ps -a | awk -v i="^$1.*" '{if($2~i){print$1}}'); }
 export ZSH="$HOME/.oh-my-zsh"
 
@@ -65,6 +66,7 @@ source $ZSH/oh-my-zsh.sh
 source ~/.nvm/nvm.sh
 ## ALIAS
 
+alias open="thunar"
 alias rando='openssl rand -base64 32'
 alias vim='nvim'
 alias cat="bat"
@@ -79,9 +81,6 @@ alias calendar=calcurse
 alias vim=nvim
 alias vi=nvim
 alias top=btop
-alias poly="~/scripts/polybar/lauch.sh"
-alias nitrogen="nitrogen $HOME/wallpapers"
-alias i3conf="vim $HOME/.config/i3/config"
 alias grep="rg --color=auto"
 alias tmux='tmux -f ~/.config/tmux/tmux.conf'
 
@@ -128,6 +127,7 @@ eval $(thefuck --alias)
 alias ls='eza -a --icons'
 alias ll='eza -al --icons'
 alias lt='eza -a --tree --level=1 --icons'
+alias orca-slicer='__GLX_VENDOR_LIBRARY_NAME=mesa __EGL_VENDOR_LIBRARY_FILENAMES=/usr/share/glvnd/egl_vendor.d/50_mesa.json MESA_LOADER_DRIVER_OVERRIDE=zink GALLIUM_DRIVER=zink WEBKIT_DISABLE_DMABUF_RENDERER=1 orca-slicer'
 
 # bun completions
 [ -s "/home/melty/.bun/_bun" ] && source "/home/melty/.bun/_bun"
@@ -135,3 +135,8 @@ alias lt='eza -a --tree --level=1 --icons'
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
+
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init - zsh)"
+eval "$(pyenv virtualenv-init -)"
