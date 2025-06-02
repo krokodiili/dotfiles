@@ -9,10 +9,11 @@ return {
         javascript = { "prettier" },
         typescript = { "prettier" },
         javascriptreact = { "prettier" },
-        typescriptreact = { "eslint_d", "prettier" },
+        typescriptreact = { "prettier" },
         svelte = { "prettier" },
         css = { "prettier" },
         html = { "prettier" },
+        astro = { "prettier" },
         json = { "prettier" },
         jsonc = { "prettier" },
         yaml = { "prettier" },
@@ -23,9 +24,8 @@ return {
         python = { "isort", "black" },
       },
       format_on_save = {
-        lsp_fallback = true,
-        async = false,
-        timeout_ms = 1000,
+        lsp_fallback = "fallback",
+        timeout_ms = 500,
       },
     })
 

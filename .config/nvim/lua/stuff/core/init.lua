@@ -1,13 +1,11 @@
 require("stuff.core.options")
 require("stuff.core.keymaps")
 
+local format_sync_grp = vim.api.nvim_create_augroup("GoFormat", {})
 vim.api.nvim_create_autocmd("BufWritePre", {
-  group = vim.api.nvim_create_augroup("TS_add_missing_imports", { clear = true }),
-  desc = "TS_add_missing_imports",
-  pattern = { "*.ts", "*.tsx", "*.js", "*.jsx" },
+  pattern = "*.go",
   callback = function()
-    vim.cmd("TSToolsAddMissingImports")
-    vim.cmd("TSToolsRemoveUnusedImports")
-    vim.cmd("write")
+    require("go.format").goimports()
   end,
+  group = format_sync_grp,
 })
