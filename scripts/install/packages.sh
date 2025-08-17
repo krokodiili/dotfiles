@@ -128,4 +128,5 @@ for THEME1 in dracula-gtk-theme dracula-cursors-git; do
 clear
 ######################################## NPM stuff
 
+( cd $ZSH_CUSTOM/plugins && git clone https://github.com/chrissicool/zsh-256color )
 exec npm install -g joplin
