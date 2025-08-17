@@ -3,6 +3,7 @@ return {
   {
     "CopilotC-Nvim/CopilotChat.nvim",
     opts = {
+      model = "gpt-4o",
       show_help = "yes", -- Show help text for CopilotChatInPlace, default: yes
       debug = true, -- Enable or disable debug mode, the log file will be in ~/.local/state/nvim/CopilotChat.nvim.log
       disable_extra_info = "no", -- Disable extra information (e.g: system prompt) in the response.
