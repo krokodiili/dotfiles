@@ -7,9 +7,9 @@ return {
     lint.linters_by_ft = {
       javascript = { "eslint_d" },
       astro = { "eslint_d" },
-      typescript = { "eslint_d" },
+      typescript = { "biomejs" },
       javascriptreact = { "eslint_d" },
-      typescriptreact = { "eslint_d" },
+      typescriptreact = { "biomejs" },
       svelte = { "eslint_d" },
       python = { "pylint" },
     }
