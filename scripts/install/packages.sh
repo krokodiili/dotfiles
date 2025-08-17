@@ -81,7 +81,6 @@ printf "\n%s - Installing necessary packages.... \n" "${NOTE}"
 ISAUR=$(command -v yay || command -v paru)
 
 packages=(
-  orca-slicer
   protonup-qt
   1password
   rg
@@ -94,9 +93,28 @@ packages=(
   aws-cli-v2
   github-cli
   samba
-  docker
+  podman
+  dbeaver
+  pyenv
+  wine
+  go
+  archlinux-java
+  xclip
+  easyeffects
+  lsp-plugins
+  man
+  dolphin
+  lazygit
+  eza
+  kitty
+  pqiv
+  stow
   synology-drive
   brave-bin
+  zathura
+  gwenview
+  libreoffice-fresh
+  gimp
 )
 
 #TODO: exec sudo usermod -aG docker plugdev $USER
