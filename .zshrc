@@ -13,8 +13,8 @@ export NVM_DIR=~/.nvm
   export PIPEWIRE_CONFIG_FILE="$HOME/.config/pipewire/pipewire.conf"
 
   # GO
-  export GOPATH=$HOME/go 
-  export PATH=$PATH:$GOPATH/bin
+  #export GOPATH=$HOME/go 
+  #export PATH=$PATH:$GOPATH/bin
 
 # SOUND
 export PIPEWIRE_CONFIG_FILE="$HOME/.config/pipewire/pipewire.conf"
@@ -23,6 +23,7 @@ export PIPEWIRE_CONFIG_FILE="$HOME/.config/pipewire/pipewire.conf"
 # ANDROID
 export JAVA_HOME="/opt/android-studio/jbr"
 export ANDROID_HOME=$HOME/Android/Sdk
+export ANDROID_SDK_ROOT=$HOME/Android/Sdk
 export PATH=$PATH:$ANDROID_HOME/emulator
 export PATH=$PATH:$ANDROID_HOME/tools
 export PATH=$PATH:$ANDROID_HOME/tools/bin
@@ -137,4 +138,10 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 export PYENV_ROOT="$HOME/.pyenv"
 [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init - zsh)"
-eval "$(pyenv virtualenv-init -)"
+#eval "$(pyenv virtualenv-init -)"
+
+[[ -s "$HOME/.gvm/scripts/gvm" ]] && source "$HOME/.gvm/scripts/gvm"
+
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+[[ -s "/home/melty/.gvm/scripts/gvm" ]] && source "/home/melty/.gvm/scripts/gvm"
