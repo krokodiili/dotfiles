@@ -1,20 +1,21 @@
 export PATH=$PATH:$HOME/flutter/bin
 export PATH=$PATH:$HOME/android-studio/bin
 export MANPATH="/usr/local/man:$MANPATH"
+export CHROME_EXECUTABLE="/usr/bin/brave"
 
 dsi() { docker stop $(docker ps -a | awk -v i="^$1.*" '{if($2~i){print$1}}'); }
 
 export ZSH="$HOME/.oh-my-zsh"
 
 GIT_PROMPT_END=" [\${AWS_PROFILE}]\n\A $ "
-ZSH_THEME="xiong-chiamiov-plus"
+ZSH_THEME="cloud"
 export NVM_DIR=~/.nvm
 
   export PIPEWIRE_CONFIG_FILE="$HOME/.config/pipewire/pipewire.conf"
 
-  # GO
-  #export GOPATH=$HOME/go 
-  #export PATH=$PATH:$GOPATH/bin
+# GO
+export GOPATH=$HOME/go 
+export PATH=$PATH:$GOPATH/bin
 
 # SOUND
 export PIPEWIRE_CONFIG_FILE="$HOME/.config/pipewire/pipewire.conf"
@@ -22,12 +23,15 @@ export PIPEWIRE_CONFIG_FILE="$HOME/.config/pipewire/pipewire.conf"
 
 # ANDROID
 export JAVA_HOME="/opt/android-studio/jbr"
+# export JAVA_HOME=/usr/lib/jvm/default
 export ANDROID_HOME=$HOME/Android/Sdk
 export ANDROID_SDK_ROOT=$HOME/Android/Sdk
 export PATH=$PATH:$ANDROID_HOME/emulator
 export PATH=$PATH:$ANDROID_HOME/tools
 export PATH=$PATH:$ANDROID_HOME/tools/bin
 export PATH=$PATH:$ANDROID_HOME/platform-tools
+# FLUTTER
+export PATH="$PATH":"$HOME/.pub-cache/bin" 
 
 export SSH_LOCATION=$HOME/.ssh
 export PATH=$PATH:$HOME/scripts
@@ -77,6 +81,7 @@ alias calendar=calcurse
 alias vim=nvim
 alias vi=nvim
 alias top=btop
+# had some problems with some scripts using grep, comment if unsure 
 alias grep="rg --color=auto"
 alias tmux='tmux -f ~/.config/tmux/tmux.conf'
 
@@ -143,5 +148,6 @@ eval "$(pyenv init - zsh)"
 [[ -s "$HOME/.gvm/scripts/gvm" ]] && source "$HOME/.gvm/scripts/gvm"
 
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
 
 [[ -s "/home/melty/.gvm/scripts/gvm" ]] && source "/home/melty/.gvm/scripts/gvm"
