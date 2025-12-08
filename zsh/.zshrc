@@ -13,9 +13,9 @@ export NVM_DIR=~/.nvm
 
   export PIPEWIRE_CONFIG_FILE="$HOME/.config/pipewire/pipewire.conf"
 
-# GO
-export GOPATH=$HOME/go 
-export PATH=$PATH:$GOPATH/bin
+  # GO
+  # export GOPATH=$HOME/go 
+  # export PATH=$PATH:$GOPATH/bin
 
 # SOUND
 export PIPEWIRE_CONFIG_FILE="$HOME/.config/pipewire/pipewire.conf"
@@ -81,8 +81,7 @@ alias calendar=calcurse
 alias vim=nvim
 alias vi=nvim
 alias top=btop
-# had some problems with some scripts using grep, comment if unsure 
-alias grep="rg --color=auto"
+#alias grep="rg --color=auto"
 alias tmux='tmux -f ~/.config/tmux/tmux.conf'
 
 
@@ -144,8 +143,6 @@ export PYENV_ROOT="$HOME/.pyenv"
 [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init - zsh)"
 #eval "$(pyenv virtualenv-init -)"
-
-[[ -s "$HOME/.gvm/scripts/gvm" ]] && source "$HOME/.gvm/scripts/gvm"
 
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
