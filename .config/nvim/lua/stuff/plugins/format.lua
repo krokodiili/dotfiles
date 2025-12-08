@@ -7,9 +7,9 @@ return {
     conform.setup({
       formatters_by_ft = {
         javascript = { "prettier" },
-        typescript = { "biome" },
+        typescript = { "prettier" },
         javascriptreact = { "prettier" },
-        typescriptreact = { "biome" },
+        typescriptreact = { "prettier" },
         svelte = { "prettier" },
         css = { "prettier" },
         html = { "prettier" },
@@ -21,7 +21,6 @@ return {
         graphql = { "prettier" },
         liquid = { "prettier" },
         lua = { "stylua" },
-        python = { "isort", "black" },
       },
       format_on_save = {
         lsp_fallback = "fallback",
