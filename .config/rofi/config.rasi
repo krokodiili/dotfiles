@@ -21,9 +21,4 @@
 
 
 //@theme "~/.config/rofi/themes/KooL_style-4.rasi"
-//@theme "~/.config/rofi/themes/KooL_style-2-Dark.rasi"
-//@theme "~/.config/rofi/themes/KooL_LonerOrZ.rasi"
-//@theme "~/.config/rofi/themes/KooL_style-2-Dark.rasi"
-//@theme "~/.config/rofi/themes/KooL_style-10-Fancy.rasi"
-//@theme "~/.config/rofi/themes/KooL_style-10-Fancy-v2.rasi"
-@theme "~/.config/rofi/themes/KooL_style-11-Win11-list-dark.rasi"
+@theme "~/.config/rofi/themes/KooL_style-6.rasi"
