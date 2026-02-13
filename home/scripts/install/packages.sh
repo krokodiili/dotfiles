@@ -115,6 +115,7 @@ packages=(
   gwenview
   libreoffice-fresh
   gimp
+  starship
 )
 
 #TODO: exec sudo usermod -aG docker plugdev $USER

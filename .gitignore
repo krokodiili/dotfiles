@@ -1,2 +1,13 @@
 *.pyc
 *.log
+.zshenv
+.env
+.ssh/
+*.pem
+*.key
+id_rsa
+id_rsa.pub
+.zsh_history
+.bash_history
+.history
+.DS_Store

@@ -7,8 +7,8 @@ dsi() { docker stop $(docker ps -a | awk -v i="^$1.*" '{if($2~i){print$1}}'); }
 
 export ZSH="$HOME/.oh-my-zsh"
 
-GIT_PROMPT_END=" [\${AWS_PROFILE}]\n\A $ "
-ZSH_THEME="cloud"
+# GIT_PROMPT_END=" [\${AWS_PROFILE}]\n\A $ "
+ZSH_THEME=""
 export NVM_DIR=~/.nvm
 
   export PIPEWIRE_CONFIG_FILE="$HOME/.config/pipewire/pipewire.conf"
@@ -132,7 +132,7 @@ alias lt='eza -a --tree --level=1 --icons'
 alias orca-slicer='__GLX_VENDOR_LIBRARY_NAME=mesa __EGL_VENDOR_LIBRARY_FILENAMES=/usr/share/glvnd/egl_vendor.d/50_mesa.json MESA_LOADER_DRIVER_OVERRIDE=zink GALLIUM_DRIVER=zink WEBKIT_DISABLE_DMABUF_RENDERER=1 orca-slicer'
 
 # bun completions
-[ -s "/home/melty/.bun/_bun" ] && source "/home/melty/.bun/_bun"
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 
 # bun
 export BUN_INSTALL="$HOME/.bun"
@@ -147,4 +147,6 @@ eval "$(pyenv init - zsh)"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 
-[[ -s "/home/melty/.gvm/scripts/gvm" ]] && source "/home/melty/.gvm/scripts/gvm"
+[[ -s "$HOME/.gvm/scripts/gvm" ]] && source "$HOME/.gvm/scripts/gvm"
+
+eval "$(starship init zsh)"
