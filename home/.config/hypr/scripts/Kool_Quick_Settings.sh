@@ -17,7 +17,7 @@ rofi_theme="$HOME/.config/rofi/config-edit.rasi"
 msg=' ⁉️ Choose what to do ⁉️'
 iDIR="$HOME/.config/swaync/images"
 scriptsDir="$HOME/.config/hypr/scripts"
-UserScripts="$HOME/.config/hypr/UserScripts"
+scripts="$HOME/.config/hypr/scripts"
 
 # Function to display the menu options without numbers
 menu() {

@@ -6,7 +6,7 @@
 # Modified inorder to refresh rofi background, Wallust, SwayNC only
 
 SCRIPTSDIR=$HOME/.config/hypr/scripts
-UserScripts=$HOME/.config/hypr/UserScripts
+scripts=$HOME/.config/hypr/scripts
 
 # Define file_exists function
 file_exists() {
@@ -39,8 +39,8 @@ swaync-client --reload-config
 
 # Relaunching rainbow borders if the script exists
 sleep 1
-if file_exists "${UserScripts}/RainbowBorders.sh"; then
-    ${UserScripts}/RainbowBorders.sh &
+if file_exists "${scripts}/RainbowBorders.sh"; then
+    ${scripts}/RainbowBorders.sh &
 fi
 
 
