@@ -1,6 +1,6 @@
 #!/bin/zsh
 # Path to your hyprland.conf file
-CONFIG_FILE="$HOME/.config/hypr/UserConfigs/UserSettings.conf"
+CONFIG_FILE="$HOME/.config/hypr/configs/general.conf"
 
 # Check if the line is commented
 if grep -q "#kb_options = caps:swapescape" "$CONFIG_FILE"; then
