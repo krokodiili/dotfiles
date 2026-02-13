@@ -15,6 +15,7 @@ return {
         "emmet_ls",
         "gopls",
         "eslint",
+        "pyright",
       },
     },
     dependencies = {
@@ -40,6 +41,9 @@ return {
         "prettier", -- prettier formatter
         "stylua", -- lua formatter
         "eslint_d",
+        "black", -- python formatter
+        "isort", -- python import sorter
+        "pylint", -- python linter
       },
     },
     dependencies = {
