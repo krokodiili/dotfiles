@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+borders \
+    active_color=0xfffaff00 \
+    inactive_color=0x44444444 \
+    width=2.0 \
+    style=round \
+    hidpi=on

@@ -1,0 +1,191 @@
+# ~/.aerospace.toml
+
+# Start AeroSpace at login
+start-at-login = true
+
+# On startup: launch borders + sketchybar, then the daily app set; ends on workspace 6
+after-startup-command = [
+    'exec-and-forget /Users/melty/.config/borders/bordersrc',
+    'exec-and-forget /opt/homebrew/bin/sketchybar',
+    'exec-and-forget /Users/melty/.local/bin/aerospace-startup-apps.sh',
+]
+
+# Notify sketchybar whenever the focused workspace changes.
+exec-on-workspace-change = ['/bin/bash', '-c',
+    '/opt/homebrew/bin/sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE'
+]
+
+# --- ✴️ Gaps ✴️ ---
+[gaps]
+inner.horizontal = 10
+inner.vertical = 10
+outer.left = 8
+outer.right = 8
+outer.top = [
+    { monitor.'(?i)built-in' = 16 },   # laptop: tight (windows tuck under the semi-transparent bar)
+    46,                                # external: bar + 8px breathing gap
+]
+outer.bottom = 8
+
+# Use alt as the main modifier
+[mode.main.binding]
+
+
+
+# --- ✴️ App Launching & System ✴️ ---
+# Terminal
+alt-enter = 'exec-and-forget open -n -a WezTerm'
+# File Manager (Finder) — always open a new window on the current workspace
+alt-e = 'exec-and-forget osascript -e "tell application \"Finder\" to make new Finder window" -e "tell application \"Finder\" to activate"'
+# Web Browser (Brave) — always open a new window showing the profile picker
+alt-b = 'exec-and-forget open -na "Brave Browser" --args --new-window "brave://profile-picker/"'
+
+# Scratchpad — floating WezTerm running `nvim ~/scratch.md`; toggles focus if already open
+alt-n = 'exec-and-forget /Users/melty/.local/bin/scratchpad.sh'
+
+# Close active window
+alt-q = 'close'
+# macOS Force Quit active process equivalent
+alt-shift-q = 'exec-and-forget osascript -e "tell application \"System Events\" to set frontApp to name of first application process whose frontmost is true" -e "tell application frontApp to quit"'
+
+# Fullscreen & Layouts
+alt-f = 'fullscreen'
+alt-shift-f = 'macos-native-fullscreen'
+alt-space = 'layout floating tiling'  # Toggle floating mode
+alt-slash = 'layout h_tiles v_tiles'  # Toggle current container's orientation
+
+# --- ✴️ Window Focus (Vim keys) ✴️ — boundaries span all monitors ---
+alt-h = 'focus --boundaries all-monitors-outer-frame --boundaries-action wrap-around-all-monitors left'
+alt-j = 'focus --boundaries all-monitors-outer-frame --boundaries-action wrap-around-all-monitors down'
+alt-k = 'focus --boundaries all-monitors-outer-frame --boundaries-action wrap-around-all-monitors up'
+alt-l = 'focus --boundaries all-monitors-outer-frame --boundaries-action wrap-around-all-monitors right'
+
+# --- ✴️ Window Focus (Arrow keys) ✴️ ---
+alt-left  = 'focus --boundaries all-monitors-outer-frame --boundaries-action wrap-around-all-monitors left'
+alt-right = 'focus --boundaries all-monitors-outer-frame --boundaries-action wrap-around-all-monitors right'
+alt-up    = 'focus --boundaries all-monitors-outer-frame --boundaries-action wrap-around-all-monitors up'
+alt-down  = 'focus --boundaries all-monitors-outer-frame --boundaries-action wrap-around-all-monitors down'
+
+# --- ✴️ Move Windows ✴️ — within workspace, then across monitors at the edge ---
+alt-shift-left  = 'exec-and-forget /Users/melty/.local/bin/aerospace-smart-move.sh left'
+alt-shift-right = 'exec-and-forget /Users/melty/.local/bin/aerospace-smart-move.sh right'
+alt-shift-up    = 'exec-and-forget /Users/melty/.local/bin/aerospace-smart-move.sh up'
+alt-shift-down  = 'exec-and-forget /Users/melty/.local/bin/aerospace-smart-move.sh down'
+
+# Move Windows (Vim keys)
+alt-shift-h = 'exec-and-forget /Users/melty/.local/bin/aerospace-smart-move.sh left'
+alt-shift-j = 'exec-and-forget /Users/melty/.local/bin/aerospace-smart-move.sh down'
+alt-shift-k = 'exec-and-forget /Users/melty/.local/bin/aerospace-smart-move.sh up'
+alt-shift-l = 'exec-and-forget /Users/melty/.local/bin/aerospace-smart-move.sh right'
+
+# --- ✴️ Workspaces ✴️ ---
+# Switch workspaces
+alt-1 = 'workspace 1'
+alt-2 = 'workspace 2'
+alt-3 = 'workspace 3'
+alt-4 = 'workspace 4'
+alt-5 = 'workspace 5'
+alt-6 = 'workspace 6'
+alt-7 = 'workspace 7'
+alt-8 = 'workspace 8'
+alt-9 = 'workspace 9'
+alt-0 = 'workspace 10'
+
+# Move active window to workspace
+alt-shift-1 = 'move-node-to-workspace 1'
+alt-shift-2 = 'move-node-to-workspace 2'
+alt-shift-3 = 'move-node-to-workspace 3'
+alt-shift-4 = 'move-node-to-workspace 4'
+alt-shift-5 = 'move-node-to-workspace 5'
+alt-shift-6 = 'move-node-to-workspace 6'
+alt-shift-7 = 'move-node-to-workspace 7'
+alt-shift-8 = 'move-node-to-workspace 8'
+alt-shift-9 = 'move-node-to-workspace 9'
+alt-shift-0 = 'move-node-to-workspace 10'
+
+alt-leftSquareBracket = 'workspace --wrap-around prev'
+alt-rightSquareBracket = 'workspace --wrap-around next'
+
+
+# Special Workspace (Scratchpad/Special equivalent)
+alt-u = 'workspace special'
+alt-shift-u = 'move-node-to-workspace special'
+
+# --- ✴️ Resizing Windows ✴️ ---
+# AeroSpace handles continuous resizing best by entering a dedicated "resize mode"
+alt-shift-r = 'mode resize'
+
+[mode.resize.binding]
+h = 'resize width -50'
+j = 'resize height +50'
+k = 'resize height -50'
+l = 'resize width +50'
+
+left = 'resize width -50'
+down = 'resize height +50'
+up = 'resize height -50'
+right = 'resize width +50'
+
+# Exit resize mode
+enter = 'mode main'
+esc = 'mode main'
+
+
+[[on-window-detected]]
+    if.app-id = 'com.tinyspeck.slackmacgap'
+    run = [
+        'move-node-to-workspace 5',
+        'layout h_tiles',
+        'exec-and-forget /Users/melty/.local/bin/aerospace-smart-split.sh',
+    ]
+[[on-window-detected]]
+    if.app-id = 'com.spotify.client'
+    run = ['move-node-to-workspace 6', 'layout v_tiles']
+
+# --- Workspaces 1-5: 3rd+ window joins active vertically (smart-split). ---
+[[on-window-detected]]
+    if.workspace = '1'
+    run = ['exec-and-forget /Users/melty/.local/bin/aerospace-smart-split.sh']
+[[on-window-detected]]
+    if.workspace = '2'
+    run = ['exec-and-forget /Users/melty/.local/bin/aerospace-smart-split.sh']
+[[on-window-detected]]
+    if.workspace = '3'
+    run = ['exec-and-forget /Users/melty/.local/bin/aerospace-smart-split.sh']
+[[on-window-detected]]
+    if.workspace = '4'
+    run = ['exec-and-forget /Users/melty/.local/bin/aerospace-smart-split.sh']
+[[on-window-detected]]
+    if.workspace = '5'
+    run = ['exec-and-forget /Users/melty/.local/bin/aerospace-smart-split.sh']
+
+# --- Workspace default orientation: 6-10 stack vertically. ---
+[[on-window-detected]]
+    if.workspace = '6'
+    run = ['layout v_tiles']
+[[on-window-detected]]
+    if.workspace = '7'
+    run = ['layout v_tiles']
+[[on-window-detected]]
+    if.workspace = '8'
+    run = ['layout v_tiles']
+[[on-window-detected]]
+    if.workspace = '9'
+    run = ['layout v_tiles']
+[[on-window-detected]]
+    if.workspace = '10'
+    run = ['layout v_tiles']
+
+# --- ✴️ Workspace ↔ Monitor Assignment ✴️ ---
+# Workspaces 1-5 stick to the main monitor, 6-10 to the secondary
+[workspace-to-monitor-force-assignment]
+1 = 'main'
+2 = 'main'
+3 = 'main'
+4 = 'main'
+5 = 'main'
+6 = 'secondary'
+7 = 'secondary'
+8 = 'secondary'
+9 = 'secondary'
+10 = 'secondary'
