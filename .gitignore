@@ -19,6 +19,9 @@ home/.config/raycast/
 # Claude Code: skip entirely for now (decide later what's worth tracking)
 home/.claude/
 
+# Project-level claude context — local-only (may have personal/work notes)
+/CLAUDE.md
+
 # Tmux runtime
 home/.config/thefuck/
 
