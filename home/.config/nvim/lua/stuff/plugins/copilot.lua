@@ -3,7 +3,10 @@ return {
   {
     "CopilotC-Nvim/CopilotChat.nvim",
     opts = {
-      model = "gpt-4o",
+      highlight_headers = false,
+      separator = "---",
+      error_header = "> [!ERROR] Error",
+      model = "claude-opus-4.6",
       show_help = "yes", -- Show help text for CopilotChatInPlace, default: yes
       debug = true, -- Enable or disable debug mode, the log file will be in ~/.local/state/nvim/CopilotChat.nvim.log
       disable_extra_info = "no", -- Disable extra information (e.g: system prompt) in the response.
@@ -38,7 +41,7 @@ return {
         function()
           local input = vim.fn.input("Quick Chat: ")
           if input ~= "" then
-            require("CopilotChat").ask(input, { selection = require("CopilotChat.select").buffer })
+            require("CopilotChat").ask(input .. "#buffer")
           end
         end,
         desc = "CopilotChat - Quick chat",
