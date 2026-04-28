@@ -45,7 +45,14 @@ config.colors = {
 -- ==========================================
 -- Fonts (mirrors kitty.conf)
 -- ==========================================
-config.font = wezterm.font("Comic Code Ligatures")
+-- Comic Code Ligatures is a paid font; on a fresh machine without it, fall
+-- back to a sane stack of monospace faces that ship with macOS.
+config.font = wezterm.font_with_fallback({
+	"Comic Code Ligatures",
+	"JetBrains Mono",
+	"SF Mono",
+	"Menlo",
+})
 config.font_size = 16.0
 config.line_height = 1.05
 config.harfbuzz_features = { "calt=1", "clig=1", "liga=1" }

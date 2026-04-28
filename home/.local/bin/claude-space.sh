@@ -9,7 +9,7 @@ set -u
 AERO=/opt/homebrew/bin/aerospace
 WEZTERM=/opt/homebrew/bin/wezterm
 TMUX_BIN=/opt/homebrew/bin/tmux
-PICKER=/Users/melty/.local/bin/claude-project-picker.sh
+PICKER=$HOME/.local/bin/claude-project-picker.sh
 
 if [ -t 0 ] && [ -t 1 ]; then
         # Inside an existing tmux client: ensure the session exists, then switch.

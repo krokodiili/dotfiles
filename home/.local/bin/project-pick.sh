@@ -10,7 +10,16 @@ RECENT_FILE="$HOME/.local/state/claude-projects.recent"
 mkdir -p "$(dirname "$RECENT_FILE")"
 touch "$RECENT_FILE"
 
-ALL=$(/usr/bin/find "$HOME/work" "$HOME/personal" -mindepth 1 -maxdepth 1 -type d 2>/dev/null | sort)
+ROOTS=()
+for d in "$HOME/work" "$HOME/personal"; do
+        [ -d "$d" ] && ROOTS+=("$d")
+done
+if [ ${#ROOTS[@]} -eq 0 ]; then
+        echo "project-pick: no project roots found (looked in ~/work and ~/personal)" >&2
+        exit 2
+fi
+
+ALL=$(/usr/bin/find "${ROOTS[@]}" -mindepth 1 -maxdepth 1 -type d 2>/dev/null | sort)
 
 # Recents (still existing) first, then everything else alphabetically; dedupe.
 ORDERED=$(

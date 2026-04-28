@@ -5,12 +5,12 @@
 
 set -e
 
-PROJECT=$(/Users/melty/.local/bin/project-pick.sh "focused project") || exit 0
+PROJECT=$($HOME/.local/bin/project-pick.sh "focused project") || exit 0
 NAME=$(basename "$PROJECT")
 SESSION="focus-$NAME"
 
 TMUX_BIN=/opt/homebrew/bin/tmux
-CLAUDE=/Users/melty/.local/bin/claude
+CLAUDE=$HOME/.local/bin/claude
 
 if ! "$TMUX_BIN" has-session -t "$SESSION" 2>/dev/null; then
         "$TMUX_BIN" new-session -d -s "$SESSION" -c "$PROJECT" -x 240 -y 60

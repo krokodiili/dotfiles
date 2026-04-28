@@ -6,7 +6,7 @@
 set -u
 
 SCRATCH_FILE="$HOME/scratch.md"
-TITLE="Scratchpad"
+TITLE="◇Scratchpad◇"
 AERO=/opt/homebrew/bin/aerospace
 WEZTERM=/opt/homebrew/bin/wezterm
 

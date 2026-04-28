@@ -5,7 +5,7 @@
 
 set -e
 
-PROJECT=$(/Users/melty/.local/bin/project-pick.sh "claude project") || exit 0
+PROJECT=$($HOME/.local/bin/project-pick.sh "claude project") || exit 0
 
 NAME=$(basename "$PROJECT")
 if [ -n "${TMUX:-}" ]; then
@@ -13,4 +13,4 @@ if [ -n "${TMUX:-}" ]; then
 fi
 
 cd "$PROJECT"
-exec /Users/melty/.local/bin/claude
+exec $HOME/.local/bin/claude
