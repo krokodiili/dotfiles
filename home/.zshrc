@@ -2,6 +2,7 @@ export PATH=$PATH:$HOME/flutter/bin
 export PATH=$PATH:$HOME/android-studio/bin
 export MANPATH="/usr/local/man:$MANPATH"
 export CHROME_EXECUTABLE="/usr/bin/brave"
+export EDITOR="nvim"
 
 dsi() { docker stop $(docker ps -a | awk -v i="^$1.*" '{if($2~i){print$1}}'); }
 
@@ -9,7 +10,9 @@ export ZSH="$HOME/.oh-my-zsh"
 
 GIT_PROMPT_END=" [\${AWS_PROFILE}]\n\A $ "
 ZSH_THEME="cloud"
-export NVM_DIR=~/.nvm
+export NVM_DIR="$HOME/.nvm"
+  [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+  [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 
   export PIPEWIRE_CONFIG_FILE="$HOME/.config/pipewire/pipewire.conf"
 
@@ -58,14 +61,12 @@ else
 fi
 
 ## OH_MY
-plugins=(git sudo dnf zsh-256color zsh-autosuggestions zsh-syntax-highlighting)
+plugins=(git sudo dnf zsh-256color)
 
 source $ZSH/oh-my-zsh.sh
 #source /etc/profile.d/google-cloud-cli.sh
-source ~/.nvm/nvm.sh
 
 ## ALIAS
-alias open="thunar"
 alias rando='openssl rand -base64 32'
 alias vim='nvim'
 alias cat="bat"
@@ -83,6 +84,8 @@ alias vi=nvim
 alias top=btop
 #alias grep="rg --color=auto"
 alias tmux='tmux -f ~/.config/tmux/tmux.conf'
+alias claude-space='~/.local/bin/claude-space.sh'
+alias pwork='~/.local/bin/pwork.sh'
 
 
 function switch-profile() {
@@ -100,14 +103,6 @@ function switch-profile() {
 
 # check the dnf plugins commands here
 # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/dnf
-
-# pnpm
-export PNPM_HOME="/home/$USER/.local/share/pnpm"
-case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
-esac
-# pnpm end
 
 # Created by `pipx` on 2023-12-14 10:03:22
 export PATH="$PATH:/home/$USER/.local/bin"
@@ -144,7 +139,7 @@ export PYENV_ROOT="$HOME/.pyenv"
 eval "$(pyenv init - zsh)"
 #eval "$(pyenv virtualenv-init -)"
 
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-
+source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source $HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 [[ -s "/home/melty/.gvm/scripts/gvm" ]] && source "/home/melty/.gvm/scripts/gvm"
+export PATH="$HOME/.local/bin:$PATH"
