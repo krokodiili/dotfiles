@@ -1,0 +1,228 @@
+#!/usr/bin/env bash
+# Sketchybar — floating cockpit pill with Nerd Font icons.
+
+PLUGIN_DIR="$HOME/.config/sketchybar/plugins"
+
+# --- Palette ---
+COLOR_BG=0x88000000
+COLOR_FG=0xffdddddd
+COLOR_ACCENT=0xfffaff00
+COLOR_MUTED=0xff6272a4
+COLOR_GLASS=0x18ffffff
+COLOR_SLASH=0x55faff00
+
+# --- Fonts ---
+FONT_TEXT="Comic Code Ligatures:Bold:12.0"
+FONT_LABEL_CJK="PingFang SC:Semibold:14.0"
+FONT_ICON="Symbols Nerd Font Mono:Regular:15.0"
+
+# --- Icon glyphs (FontAwesome codepoints emitted via printf so the bytes can't
+# be stripped en route to disk).
+ICON_CPU=$(printf '\xef\x8b\x9b')         # F2DB microchip
+ICON_MEM=$(printf '\xef\x82\x85')         # F085 cogs (memory substitute — F538 absent in this font)
+ICON_BATT_FULL=$(printf '\xef\x89\x80')   # F240 battery full
+ICON_BATT_3Q=$(printf '\xef\x89\x81')     # F241 battery 3/4
+ICON_BATT_HALF=$(printf '\xef\x89\x82')   # F242 battery half
+ICON_BATT_Q=$(printf '\xef\x89\x83')      # F243 battery 1/4
+ICON_BATT_EMPTY=$(printf '\xef\x89\x84')  # F244 battery empty
+ICON_BOLT=$(printf '\xef\x83\xa7')        # F0E7 bolt
+ICON_VOL_HI=$(printf '\xef\x80\xa8')      # F028 volume up
+ICON_VOL_LO=$(printf '\xef\x80\xa7')      # F027 volume down
+ICON_VOL_OFF=$(printf '\xef\x80\xa6')     # F026 volume off
+ICON_PLAY=$(printf '\xef\x81\x8b')        # F04B play
+ICON_PAUSE=$(printf '\xef\x81\x8c')       # F04C pause
+ICON_CLOCK=$(printf '\xef\x80\x97')       # F017 clock-o
+
+# Pipe glyph for slash_3 — U+2016 DOUBLE VERTICAL LINE (single glyph, two close strokes).
+GLYPH_PIPE=$(printf '\xe2\x80\x96')
+
+ws_label() {
+        case "$1" in
+                1)       echo "一" ;;
+                2)       echo "二" ;;
+                3)       echo "三" ;;
+                4)       echo "四" ;;
+                5)       echo "五" ;;
+                6)       echo "六" ;;
+                7)       echo "七" ;;
+                8)       echo "八" ;;
+                9)       echo "九" ;;
+                10)      echo "十" ;;
+                special) echo "馬" ;;
+                *)       echo "$1" ;;
+        esac
+}
+
+# Export icon vars so plugin scripts can read them too.
+export ICON_CPU ICON_MEM ICON_BATT_FULL ICON_BATT_3Q ICON_BATT_HALF \
+       ICON_BATT_Q ICON_BATT_EMPTY ICON_BOLT ICON_VOL_HI ICON_VOL_LO \
+       ICON_VOL_OFF ICON_PLAY ICON_PAUSE ICON_CLOCK
+
+sketchybar --add event aerospace_workspace_change
+
+sketchybar --bar \
+        position=top \
+        height=30 \
+        margin=8 \
+        y_offset=8 \
+        corner_radius=8 \
+        blur_radius=30 \
+        color=$COLOR_BG \
+        border_width=0 \
+        padding_left=0 \
+        padding_right=0 \
+        sticky=on \
+        topmost=window
+
+sketchybar --default \
+        icon.font="$FONT_ICON" \
+        icon.color=$COLOR_FG \
+        label.font="$FONT_LABEL_CJK" \
+        label.color=$COLOR_MUTED \
+        background.drawing=off \
+        background.corner_radius=6 \
+        background.height=22 \
+        padding_left=2 \
+        padding_right=2
+
+# Helper: thick double-stroke decoration. $3 is the glyph (⫽ or ‖).
+add_decoration() {
+        local name="$1"
+        local position="$2"
+        local glyph="$3"
+        sketchybar --add item "$name" "$position" \
+                --set "$name" \
+                        label="$glyph" \
+                        label.font="Comic Code Ligatures:Bold:300.0" \
+                        label.color=$COLOR_SLASH \
+                        label.padding_left=0 \
+                        label.padding_right=0 \
+                        padding_left=0 \
+                        padding_right=0
+}
+
+# Slash 1 — leftmost.
+add_decoration slash_1 left "⫽"
+sketchybar --set slash_1 label.padding_left=-20
+
+# Workspace pills.
+for ws in $(aerospace list-workspaces --all); do
+        sketchybar --add item space.$ws left \
+                --subscribe space.$ws aerospace_workspace_change \
+                --set space.$ws \
+                        label="$(ws_label "$ws")" \
+                        label.padding_left=8 \
+                        label.padding_right=8 \
+                        click_script="aerospace workspace $ws" \
+                        script="$PLUGIN_DIR/aerospace.sh $ws"
+done
+
+# Front app indicator.
+sketchybar --add item front_app left \
+        --set front_app \
+                label.font="$FONT_TEXT" \
+                label.color=$COLOR_ACCENT \
+                label.padding_left=8 \
+                label.padding_right=4 \
+                script="$PLUGIN_DIR/front_app.sh" \
+        --subscribe front_app front_app_switched
+
+# --- Right side (added right-to-left) ---
+
+sketchybar --add item clock right \
+        --set clock \
+                update_freq=10 \
+                icon="$ICON_CLOCK" \
+                icon.color=$COLOR_FG \
+                icon.padding_left=8 \
+                icon.padding_right=6 \
+                label.font="$FONT_TEXT" \
+                label.color=$COLOR_FG \
+                label.padding_right=8 \
+                background.drawing=on \
+                background.color=$COLOR_GLASS \
+                background.border_width=0 \
+                script="$PLUGIN_DIR/clock.sh"
+
+sketchybar --add item battery right \
+        --set battery \
+                update_freq=15 \
+                icon="$ICON_BATT_FULL" \
+                icon.color=$COLOR_FG \
+                icon.padding_left=8 \
+                icon.padding_right=6 \
+                label.font="$FONT_TEXT" \
+                label.color=$COLOR_FG \
+                label.padding_right=8 \
+                background.drawing=on \
+                background.color=$COLOR_GLASS \
+                background.border_width=0 \
+                script="$PLUGIN_DIR/battery.sh"
+
+sketchybar --add item mem right \
+        --set mem \
+                update_freq=3 \
+                icon="$ICON_MEM" \
+                icon.color=$COLOR_FG \
+                icon.padding_left=8 \
+                icon.padding_right=6 \
+                label.font="$FONT_TEXT" \
+                label.color=$COLOR_FG \
+                label.padding_right=8 \
+                background.drawing=on \
+                background.color=$COLOR_GLASS \
+                background.border_width=0 \
+                script="$PLUGIN_DIR/mem.sh"
+
+sketchybar --add item cpu right \
+        --set cpu \
+                update_freq=3 \
+                icon="$ICON_CPU" \
+                icon.color=$COLOR_FG \
+                icon.padding_left=8 \
+                icon.padding_right=6 \
+                label.font="$FONT_TEXT" \
+                label.color=$COLOR_FG \
+                label.padding_right=8 \
+                background.drawing=on \
+                background.color=$COLOR_GLASS \
+                background.border_width=0 \
+                script="$PLUGIN_DIR/cpu.sh"
+
+sketchybar --add item volume right \
+        --set volume \
+                icon="$ICON_VOL_HI" \
+                icon.color=$COLOR_FG \
+                icon.padding_left=8 \
+                icon.padding_right=6 \
+                label.font="$FONT_TEXT" \
+                label.color=$COLOR_FG \
+                label.padding_right=8 \
+                background.drawing=on \
+                background.color=$COLOR_GLASS \
+                background.border_width=0 \
+                click_script="osascript -e 'set volume output muted (not (output muted of (get volume settings)))'" \
+                script="$PLUGIN_DIR/volume.sh" \
+        --subscribe volume volume_change
+
+sketchybar --add item media right \
+        --set media \
+                update_freq=5 \
+                icon="$ICON_PLAY" \
+                icon.color=$COLOR_FG \
+                icon.padding_left=10 \
+                icon.padding_right=10 \
+                label.drawing=off \
+                background.drawing=on \
+                background.color=$COLOR_GLASS \
+                background.border_width=0 \
+                click_script="/opt/homebrew/bin/nowplaying-cli togglePlayPause" \
+                script="$PLUGIN_DIR/media.sh"
+
+# Slash 3 — ASCII || at 90pt. Visually thinner than the big-overflow ‖.
+add_decoration slash_3 right "||"
+sketchybar --set slash_3 \
+        label.font="Comic Code Ligatures:Bold:90.0" \
+        padding_right=14
+
+sketchybar --update
