@@ -1,2 +1,26 @@
 *.pyc
 *.log
+
+# Root-level convenience symlinks (point into home/, not for tracking)
+/.config
+/.ideavimrc
+/.zshenv-sample
+/.zshrc
+/scripts
+/sound-prof
+
+# Sensitive app data — auth tokens, session state, account info
+home/.config/1Password/
+home/.config/cagent/
+home/.config/gh/
+home/.config/github-copilot/
+home/.config/raycast/
+
+# Claude Code: skip entirely for now (decide later what's worth tracking)
+home/.claude/
+
+# Tmux runtime
+home/.config/thefuck/
+
+# macOS
+.DS_Store
